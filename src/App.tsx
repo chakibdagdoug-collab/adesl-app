@@ -472,6 +472,7 @@ export default function App() {
               step={bookingStep}
               setStep={setBookingStep}
               facility={bookingFacility}
+              setFacility={setBookingFacility}
               sport={bookingSport}
               setSport={setBookingSport}
               date={bookingDate}
@@ -1336,6 +1337,7 @@ interface ReservationFlowProps {
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
   facility: Facility;
+  setFacility: Dispatch<SetStateAction<Facility>>;
   sport: string;
   setSport: Dispatch<SetStateAction<string>>;
   date: string;
@@ -1347,7 +1349,7 @@ interface ReservationFlowProps {
   language: Language;
 }
 
-function ReservationFlow({ step, setStep, facility, sport, setSport, date, setDate, time, setTime, onCompleteBooking, onBack, language }: ReservationFlowProps) {
+function ReservationFlow({ step, setStep, facility, setFacility, sport, setSport, date, setDate, time, setTime, onCompleteBooking, onBack, language }: ReservationFlowProps) {
   
   const dates = [
     { label: 'VEN 11', value: 'VEN 11 SEPT' },
@@ -1374,12 +1376,12 @@ function ReservationFlow({ step, setStep, facility, sport, setSport, date, setDa
           </button>
           <div>
             <h1 className="text-lg font-black">{language === 'ar' ? 'حجز ملعب' : 'Réserver un terrain'}</h1>
-            <p className="text-xs text-emerald-200/80">{language === 'ar' ? 'خطوة ' + step + ' من 4' : `Étape ${step} sur 4`}</p>
+            <p className="text-xs text-emerald-200/80">{language === 'ar' ? 'خطوة ' + step + ' من 5' : `Étape ${step} sur 5`}</p>
           </div>
         </div>
 
         <div className="flex space-x-1.5 rtl:space-x-reverse">
-          {[1, 2, 3, 4].map((s) => (
+          {[1, 2, 3, 4, 5].map((s) => (
             <div 
               key={s} 
               className={`h-1.5 flex-1 rounded-full transition-all ${s <= step ? 'bg-[#C8F000]' : 'bg-emerald-900/60'}`}
@@ -1415,10 +1417,29 @@ function ReservationFlow({ step, setStep, facility, sport, setSport, date, setDa
           </div>
         )}
 
-        {step === 2 && (
-          <div className="space-y-6">
-            <div className="space-y-2">
-              <h2 className="text-sm font-black text-slate-900 uppercase tracking-tight">2. Choisir la date</h2>
+  {step === 2 && (
+  <div className="space-y-5">
+  <div>
+  <span className="text-[10px] font-extrabold text-[#0B6B4F] uppercase tracking-widest">Étape 2</span>
+  <h2 className="text-sm font-black text-slate-900 uppercase tracking-tight mt-1">Choisir le terrain</h2>
+  </div>
+  <div className="space-y-3">
+  {FACILITIES_DATA.filter((item) => item.sport === sport || sport === 'Football').map((item) => (
+  <button key={item.id} onClick={() => setFacility(item)} className={`w-full p-3 rounded-2xl border text-left flex items-center gap-3 transition ${facility.id === item.id ? 'bg-[#022C27] text-white border-[#022C27]' : 'bg-white text-slate-800 border-slate-200'}`}>
+  <img src={item.image} alt="" className="w-14 h-14 rounded-xl object-cover" />
+  <span className="flex-1 min-w-0"><strong className="block text-xs truncate">{item.name}</strong><small className={facility.id === item.id ? 'text-emerald-200' : 'text-slate-500'}>{item.location}</small></span>
+  <span className="text-xs font-black">{item.price} MAD</span>
+  </button>
+  ))}
+  </div>
+  <button onClick={() => setStep(3)} className="w-full py-4 bg-[#C8F000] text-[#022C27] font-black text-xs rounded-2xl shadow-md">CONTINUER</button>
+  </div>
+  )}
+
+  {step === 3 && (
+  <div className="space-y-6">
+  <div className="space-y-2">
+  <h2 className="text-sm font-black text-slate-900 uppercase tracking-tight">3. Date et heure</h2>
               <div className="grid grid-cols-4 gap-2">
                 {dates.map((d) => (
                   <button
@@ -1450,7 +1471,7 @@ function ReservationFlow({ step, setStep, facility, sport, setSport, date, setDa
             </div>
 
             <button 
-              onClick={() => setStep(3)}
+onClick={() => setStep(4)}
               className="w-full py-4 bg-[#C8F000] text-[#022C27] font-black text-xs rounded-2xl shadow-md mt-6"
             >
               {language === 'ar' ? 'معاينة الملخص' : 'VOIR LE RÉSUMÉ'}
@@ -1458,9 +1479,18 @@ function ReservationFlow({ step, setStep, facility, sport, setSport, date, setDa
           </div>
         )}
 
-        {step === 3 && (
-          <div className="space-y-6">
-            <h2 className="text-sm font-black text-slate-900 uppercase tracking-tight">Résumé de la réservation</h2>
+  {step === 4 && (
+  <div className="space-y-6">
+  <div>
+  <span className="text-[10px] font-extrabold text-[#0B6B4F] uppercase tracking-widest">Étape 4</span>
+  <h2 className="text-sm font-black text-slate-900 uppercase tracking-tight mt-1">Vos informations</h2>
+  </div>
+  <div className="grid grid-cols-2 gap-2">
+  <input aria-label="Prénom" placeholder="Prénom" defaultValue="Ahmed" className="p-3 text-xs" />
+  <input aria-label="Nom" placeholder="Nom" defaultValue="El Amrani" className="p-3 text-xs" />
+  </div>
+  <input aria-label="Téléphone" placeholder="Téléphone" defaultValue="06 12 34 56 78" className="w-full p-3 text-xs" />
+  <h2 className="text-sm font-black text-slate-900 uppercase tracking-tight">Résumé de la réservation</h2>
 
             <div className="bg-white p-5 rounded-3xl border border-slate-200/80 space-y-4 shadow-sm">
               <div className="flex items-center space-x-3 rtl:space-x-reverse border-b border-slate-100 pb-3">
@@ -1494,15 +1524,15 @@ function ReservationFlow({ step, setStep, facility, sport, setSport, date, setDa
             </div>
 
             <button 
-              onClick={() => setStep(4)}
-              className="w-full py-4 bg-[#C8F000] text-[#022C27] font-black text-xs rounded-2xl shadow-md"
-            >
-              {language === 'ar' ? 'الانتقال إلى الأداء' : 'PASSER AU PAIEMENT'}
+  onClick={() => setStep(5)}
+  className="w-full py-4 bg-[#C8F000] text-[#022C27] font-black text-xs rounded-2xl shadow-md"
+  >
+  {language === 'ar' ? 'الانتقال إلى الأداء' : 'PASSER AU PAIEMENT'}
             </button>
           </div>
         )}
 
-        {step === 4 && (
+        {step === 5 && (
           <div className="space-y-6">
             <div className="bg-amber-50 border border-amber-200 text-amber-900 p-3 rounded-2xl text-[11px] font-medium flex items-center space-x-2 rtl:space-x-reverse">
               <Info size={16} className="text-amber-600 flex-shrink-0" />
