@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root { --adesl-ink:#092a24; --adesl-deep:#073b32; --adesl-green:#0b6b4f; --adesl-lime:#c8f000; --adesl-paper:#f5f7f2; --adesl-muted:#71827b; --adesl-line:#dfe8df; }
+
+.adesl-app-shell { max-width: 520px; margin: 0 auto; background: var(--adesl-paper); color: var(--adesl-ink); font-family: 'DM Sans', sans-serif; box-shadow: 0 0 0 1px rgba(9,42,36,.04), 0 24px 80px rgba(9,42,36,.12); }
+.adesl-screen-container { min-height: calc(100vh - 108px); padding-bottom: env(safe-area-inset-bottom); }
+.adesl-app-shell h1,.adesl-app-shell h2,.adesl-app-shell h3 { font-family:'Space Grotesk',sans-serif; letter-spacing:-.035em; }
+.adesl-app-shell button { -webkit-tap-highlight-color: transparent; }
+.adesl-app-shell img { object-fit: cover; }
+
+/* Quiet Moroccan zellige detail, used only as a texture. */
+.moroccan-pattern { background-image: linear-gradient(135deg, rgba(200,240,0,.08) 25%, transparent 25%), linear-gradient(225deg, rgba(200,240,0,.08) 25%, transparent 25%); background-size: 18px 18px; background-position: 0 0, 9px 9px; }
+
+.adesl-app-shell .rounded-3xl { border-radius: 24px; }
+.adesl-app-shell .rounded-2xl { border-radius: 18px; }
+.adesl-app-shell .rounded-xl { border-radius: 14px; }
+.adesl-app-shell .shadow-2xl { box-shadow: 0 18px 40px rgba(7,59,50,.16); }
+.adesl-app-shell .shadow-lg { box-shadow: 0 10px 24px rgba(7,59,50,.16); }
+.adesl-app-shell input, .adesl-app-shell textarea, .adesl-app-shell select { border: 1px solid var(--adesl-line); background: #fff; color: var(--adesl-ink); border-radius: 14px; outline: none; }
+.adesl-app-shell input:focus, .adesl-app-shell textarea:focus, .adesl-app-shell select:focus { border-color: var(--adesl-green); box-shadow: 0 0 0 3px rgba(11,107,79,.12); }
+.adesl-app-shell .bg-\[\#F5F7F4\] { background-color: var(--adesl-paper); }
+
+@media (min-width: 640px) { .adesl-app-shell { min-height: 100vh; } }
+@media (max-width: 340px) { .adesl-app-shell { font-size: 13px; } .adesl-screen-container { min-height: calc(100vh - 104px); } }
+
+.animate-fadeIn { animation: adesl-fade .35s ease-out both; }
+@keyframes adesl-fade { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:none; } }
+@keyframes adesl-rise { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+.adesl-app-shell > * { animation: adesl-rise .28s ease-out both; }
+.scrollbar-none { scrollbar-width:none; -ms-overflow-style:none; }
+.scrollbar-none::-webkit-scrollbar { display:none; }
+.rtl { direction:rtl; } .ltr { direction:ltr; }
+.moroccan-pattern, .adesl-splash-logo { isolation:isolate; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+
+/* Improve common prototype utility combinations without changing the data model. */
+.adesl-app-shell .bg-\[\#022C27\] { background-color: var(--adesl-deep); }
+.adesl-app-shell .bg-\[\#063B32\] { background-color: #0a4a3d; }
+.adesl-app-shell .text-\[\#C8F000\] { color: var(--adesl-lime); }
+.adesl-app-shell .bg-\[\#C8F000\] { background-color: var(--adesl-lime); }
+.adesl-app-shell .text-\[\#10231F\] { color: var(--adesl-ink); }
+.adesl-app-shell .border-\[\#C8F000\] { border-color: var(--adesl-lime); }
+
+/* Make the persistent navigation feel like an app control rail. */
+.adesl-app-shell > .bg-\[\#022C27\]:last-child { padding-bottom: max(.5rem, env(safe-area-inset-bottom)); backdrop-filter: blur(16px); }
+.adesl-app-shell > .bg-\[\#022C27\]:last-child button { min-width: 48px; }
+
+@media (max-width: 520px) { body { background: var(--adesl-paper); } }
+@media (min-width: 521px) { body { background: #e8eee8; } }
+
+.adesl-logo { flex: none; }
+button:focus-visible, a:focus-visible { outline: 3px solid rgba(200,240,0,.75); outline-offset: 3px; }
+img { max-width:100%; }
+
+/* Existing utility compatibility */
+.animate-spin { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.animate-pulse { animation: pulse 1.8s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity:.65; transform:scale(1.03); } }
+.font-sans { font-family:'DM Sans',sans-serif; }
+.font-black { font-weight:800; }
+.tracking-wider { letter-spacing:.08em; }
+.tracking-widest { letter-spacing:.16em; }
+.space-y-1 > :not([hidden]) ~ :not([hidden]) { margin-top:.25rem; }
+.space-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top:.5rem; }
+.space-y-3 > :not([hidden]) ~ :not([hidden]) { margin-top:.75rem; }
+.space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top:1rem; }
+.space-x-1 > :not([hidden]) ~ :not([hidden]) { margin-left:.25rem; }
+.space-x-2 > :not([hidden]) ~ :not([hidden]) { margin-left:.5rem; }
+.rtl .space-x-1 > :not([hidden]) ~ :not([hidden]), .rtl .space-x-2 > :not([hidden]) ~ :not([hidden]) { margin-left:0; margin-right:.5rem; }
+.rtl .space-x-1 > :not([hidden]) ~ :not([hidden]) { margin-right:.25rem; }
