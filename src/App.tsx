@@ -357,28 +357,12 @@ export default function App() {
     <div className="min-h-screen w-full bg-[#F5F7F4] text-slate-900 font-sans antialiased">
       <div className={`adesl-app-shell w-full min-h-screen bg-[#F5F7F4] overflow-hidden relative flex flex-col ${isRTL ? 'rtl' : 'ltr'}`}>
         
-        {/* Desktop/web application header — no phone frame or simulated device chrome */}
-        <div className="w-full bg-[#022C27] px-5 py-3 flex items-center justify-between text-xs text-emerald-100/80 z-50 select-none">
+        <div className="bg-[#022C27] px-4 py-3 flex items-center justify-between text-xs text-emerald-100/80 z-50 select-none moroccan-pattern">
           <div className="flex items-center gap-2">
-            <AdeslLogo className="w-5 h-5" color="#C8F000" />
-            <span className="font-bold tracking-wide text-white">ADESL</span>
+            <AdeslLogo className="w-7 h-7" color="#C8F000" />
+            <div><span className="block font-black tracking-wide text-white">ADESL</span><span className="block text-[9px] text-emerald-200/70">SPORT & LOISIRS</span></div>
           </div>
-          <span className="hidden sm:block text-[11px] text-emerald-200/70">Plateforme de gestion des espaces sportifs</span>
-        </div>
-
-        {/* Prototype Header Banner */}
-        <div className="bg-[#063B32] border-b border-emerald-800/40 px-3 py-1.5 flex items-center justify-between text-[11px] text-emerald-200">
-          <div className="flex items-center space-x-2 rtl:space-x-reverse font-medium">
-            <AdeslLogo className="w-5 h-5" color="#C8F000" />
-            <span className="font-bold text-white tracking-wide">ADESL PROTOTYPE</span>
-          </div>
-          <button 
-            onClick={() => setLanguage(language === 'fr' ? 'ar' : 'fr')}
-            className="flex items-center space-x-1 rtl:space-x-reverse bg-emerald-900/60 hover:bg-emerald-900 px-2 py-0.5 rounded-full text-xs text-[#C8F000] font-semibold border border-[#C8F000]/30 transition"
-          >
-            <Globe size={11} />
-            <span>{language === 'fr' ? 'العربية (RTL)' : 'Français'}</span>
-          </button>
+          <button onClick={() => setLanguage(language === 'fr' ? 'ar' : 'fr')} aria-label="Changer de langue" className="flex items-center gap-1.5 bg-emerald-900/60 hover:bg-emerald-900 px-3 py-1.5 rounded-full text-[10px] text-[#C8F000] font-bold border border-[#C8F000]/30 transition"><Globe size={12} /><span>{language === 'fr' ? 'العربية' : 'Français'}</span></button>
         </div>
 
         {/* MAIN INTERFACE SCREEN SWITCHER */}
